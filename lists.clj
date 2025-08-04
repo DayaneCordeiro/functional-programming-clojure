@@ -19,3 +19,17 @@
 
 ;; a função map aplica o fizzbuzz a cada elemento da lista
 (map fizzbuzz um-ate-15) ; (1 2 "fizz" 4 "buzz" "fizz" 7 8 "fizz" "buzz" 11 "fizz" 13 14 "fizzbuzz")
+
+;; manipulando posições de uma lista (capitulo que fala de vetores) ============
+; listas também podem ter elementos variados como os vetores:
+(def cantora-arretada (list "Renata Arruda" "João Pessoa" 23 "dezembro" 1967)) ; #'user/cantora-arretada
+
+(nth cantora-arretada 0) ; Renata Arruda
+
+(nth cantora-arretada 4) ; 1967
+
+(last cantora-arretada) ; 1967
+
+(first cantora-arretada) ; "Renata Arruda"
+
+(conj cantora-arretada "MPB") ; ("MPB" "Renata Arruda" "João Pessoa" 23 "dezembro" 1967)
