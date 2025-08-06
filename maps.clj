@@ -24,4 +24,15 @@ transacao ; {:valor 200, :tipo "receita"}
 ;; mapa como mostrado acima, pois elas podem ser usadas como funções para pegar os valores.
 {"chave" "valor"} ; {"chave" "valor"}
 
+;; é possível incluir valores opcionais quando chaves não são encontradas: ===============
+(def transacao-desnecessaria {:valor 34
+                              :tipo "despesa"
+                              :rotulos '("desnecessaria"
+                                         "cartao")}) ; #'user/transacao-desnecessaria
 
+(:rotulos transacao-desnecessaria) ; ("desnecessaria" "cartao")
+
+(:rotulos transacao) ; nil
+
+;; vai retornar uma lista vazia caso a chave :rotulos não seja encontrada:
+(:rotulos transacao '()) ; ()
