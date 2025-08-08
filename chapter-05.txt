@@ -1,0 +1,10 @@
+A programação funcional é baseada no cálculo lambda, desenvolvido em 1930.
+Alguns conceitos de linguagens imperativas não existem em programação funcional, como loops e vars.
+
+Funções de primeira classe -> funções são tratadas como valores, uma função também pode ser passada 
+como argumento.
+
+Funções de grandeza superior -> funções que recebem funções como argumento, ou que retornam uma como 
+resultado.
+Um exemplo de função de grandeza superior é o map, que é um recurso que o Clojure provê para se iterar
+sobre uma coleção e a cada iteração, aplica-se uma função.
