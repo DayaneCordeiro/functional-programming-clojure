@@ -1,0 +1,35 @@
+(+ 1 2) ; primeiro argumento é uma função
+
+; concatenação de strings
+(str "Oi", " mundo!")
+
+; verificando se duas strings são iguais
+(= "Oi", "Olá")
+
+; um número é par?
+(even? 2) ; função nativa do clojure
+
+; é divisível por 3?
+(= 0 (mod 9 3))
+
+; Função que recebe um nome e retorna "Oi nome"
+(defn oi [nome]
+  (str "Oi, " nome "!"))
+
+user => (oi "Dayane")
+
+; Função que valida se é múltiplo de 3
+(defn multiplo-de-3? [numero]
+  (= 0 (mod numero 3)))
+
+; If <- so serve para casos com duas opções (true ou false)
+(defn par? [numero]
+  (if (even? numero)
+    "sim"
+    "não"))
+
+; cond (macro) -> "if" para mais de duas opções
+(defn saldo [valor]
+  (cond (< valor 0) "negativo"
+        (> valor 0) "positivo"
+        :else "zero")) ; else não faz nada, mas é usado por convenção, mas poderia ser :batata que ia funcionar
