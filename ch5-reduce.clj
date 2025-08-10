@@ -17,4 +17,6 @@
 (map valor (filter despesa? transacoes)) ; (33.0 29.0)
 
 ;; aplica a operação de soma sobre as despesas
+;; reduce começa com nil, aplica nesse caso a função + ao primeiro elemento da lista e guarda em um 
+;; acumulador
 (reduce + (map valor (filter despesa? transacoes))) ; 62.0
