@@ -28,5 +28,21 @@
         transacoes) ; ({:valor 2700.0, :tipo "receita", :comentatio "AlmBicooço", :data "01/12/2016"})
 
 ;; mas não é necessário usar fn para criar uma função anônima, pode se utilizar #() também
+;; nesse tipo de declaração, os argumentos não precisam ser nomeados, podendo utilizar apenas o % ou
+;; %1, %2... quando existem mais argumentos
 (filter #(> (:valor %) 100)
         transacoes) ; ({:valor 2700.0, :tipo "receita", :comentatio "AlmBicooço", :data "01/12/2016"})
+
+;; tendo em vista como as funções anônimas funcionam, é possível pegar o código antigo:
+(defn despesa? [transacao]
+  (= (:tipo transacao) "despesa")) 
+
+(defn valor [transacao]
+  (:valor transacao)) 
+
+(reduce + (map valor (filter despesa? transacoes)))
+
+;; e condensar nisso:
+(reduce + (map #(:valor %)
+               (filter #(= (:tipo %) "despesa")
+                       transacoes))) ;; 62.0
