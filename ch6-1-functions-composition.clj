@@ -34,3 +34,21 @@
 ;; Gera uma versão em texto do resumo de uma transação
 (texto-resumo uma-transacao-qualquer) ; "01/12/2016 => R$ +2700.00"
 
+;; e caso não exista uma moeda definida?
+(defn valor-sinalizado [transacao]
+  (let [moeda (:moeda transacao "R$") ;; ou pega a moeda de transação ou retorna R$
+        valor (:valor transacao)]
+    (if (= (:tipo transacao) "despesa")
+      (str moeda " -" valor)
+      (str moeda " +" valor)))) ; #'user/valor-sinalizado
+
+(def transacao-aleatoria {:valor 9.0})
+
+(valor-sinalizado transacao-aleatoria) ; "R$ +9.0"
+
+;; agora incluimos a data nesse formato: "01/12/2016 => R$ +2700.00"
+(defn data-transacao [transacao]
+  (str (:data transacao) " => " (valor-sinalizado transacao))) ; #'user/data-transacao
+
+(data-transacao (first transacoes)) ; "19/11/2016 => R$ -33.0"
+
