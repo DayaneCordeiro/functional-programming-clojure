@@ -52,3 +52,21 @@
 
 (data-transacao (first transacoes)) ; "19/11/2016 => R$ -33.0"
 
+;; e se quiser converter de moeda, BR para Chinesa?
+;; dando exemplo de que R$1,00 valha ¥2,15
+(defn transacao-em-yuan [transacao]
+      (assoc transacao :valor (* 2.15 (:valor transacao)) ; assoc pega o mapa transacao e associa 
+             :moeda "¥"))                                 ; os valores que seguem como argumento
+
+(transacao-em-yuan (first transacoes)) ; {:valor 70.95, :tipo "despesa", :comentatio "Almoço", :moeda "¥", :data "19/11/2016"}
+
+;; dando uma pequena melhorada:
+(def cotacoes
+  {:yuan {:cotacao 2.15 :simbolo "¥"}}) ; #'user/cotacoes
+
+(defn transacao-em-yuan [transacao]
+  (assoc transacao :valor (* (:cotacao (:yuan cotacoes))
+                             (:valor transacao))
+         :moeda (:simbolo (:yuan cotacoes)))) ; #'user/transacao-em-yuan
+
+(transacao-em-yuan (first transacoes)) ; {:valor 70.95, :tipo "despesa", :comentatio "Almoço", :moeda "¥", :data "19/11/2016"}
