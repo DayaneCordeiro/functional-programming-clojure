@@ -70,3 +70,12 @@
          :moeda (:simbolo (:yuan cotacoes)))) ; #'user/transacao-em-yuan
 
 (transacao-em-yuan (first transacoes)) ; {:valor 70.95, :tipo "despesa", :comentatio "Almoço", :moeda "¥", :data "19/11/2016"}
+
+;; so que com essa função resolve um problema e cria outro, ja que se torna mais complexo
+;; ficar pegando a cotação, então da pra usar a função get-in
+(defn transacao-em-yuan [transacao]
+  (assoc transacao :valor (* (get-in cotacoes [:yuan :cotacao])
+                             (:valor transacao))
+         :moeda (get-in cotacoes [:yuan :simbolo]))) ; #'user/transacao-em-yuan
+
+(transacao-em-yuan (first transacoes)) ; {:valor 70.95, :tipo "despesa", :comentatio "Almoço", :moeda "¥", :data "19/11/2016"}
