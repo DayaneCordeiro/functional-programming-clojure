@@ -87,3 +87,13 @@
            :moeda (:simbolo yuan)))) ; #'user/transacao-em-yuan
 
 (transacao-em-yuan (first transacoes)) ; {:valor 70.95, :tipo "despesa", :comentatio "Almoço", :moeda "¥", :data "19/11/2016"}
+
+(data-transacao (first transacoes)) ; "19/11/2016 => R$ -33.0"
+
+(data-transacao (transacao-em-yuan (first transacoes))) ; "19/11/2016 => ¥ -70.95"
+
+(defn texto-resumo-em-yuan [transacao]
+  (data-transacao (transacao-em-yuan transacao))) ; #'user/texto-resumo-em-yuan
+
+(map texto-resumo-em-yuan transacoes) ; ("19/11/2016 => ¥ -70.95" "01/12/2016 => ¥ +5805.0" "03/12/2016 => ¥ -62.349999999999994")
+
