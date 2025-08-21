@@ -17,3 +17,23 @@
            :moeda simbolo)))
 
 (transacao-em-yuan (first transacoes)) ; {:valor 70.950M, :tipo "despesa", :comentatio "Almoço", :moeda "¥", :data "19/11/2016"}
+
+;; visando a possibilidade de reutilizar a mesma função para outras moedas
+(def cotacoes
+  {:yuan {:cotacao 2.15M :simbolo "¥"}
+   :euro {:cotacao 0.28M :simbolo "€"}})
+
+;; a moeda agora é passada por parâmetro
+(defn transacao-em-outra-moeda [moeda transacao]
+  (let [{{cotacao :cotacao simbolo :simbolo} moeda} cotacoes]
+    (assoc transacao :valor (* cotacao (:valor transacao))
+           :moeda simbolo)))
+
+;; o simbolo do euro bugou no terminal
+(transacao-em-outra-moeda :euro (first transacoes)) ; {:valor 9.240M, :tipo "despesa", :comentatio "Almoço", :moeda "?", :data "19/11/2016"}
+
+(transacao-em-outra-moeda :euro (last transacoes)) ; {:valor 8.120M, :tipo "despesa", :comentatio "Livro de Clojure", :moeda "?", :data "03/12/2016"}
+
+(transacao-em-outra-moeda :yuan (first transacoes)) ; {:valor 70.950M, :tipo "despesa", :comentatio "Almoço", :moeda "¥", :data "19/11/2016"}
+
+(transacao-em-outra-moeda :yuan (last transacoes)) ; {:valor 62.350M, :tipo "despesa", :comentatio "Livro de Clojure", :moeda "¥", :data "03/12/2016"}
