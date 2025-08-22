@@ -37,3 +37,13 @@
 (transacao-em-outra-moeda :yuan (first transacoes)) ; {:valor 70.950M, :tipo "despesa", :comentatio "Almoço", :moeda "¥", :data "19/11/2016"}
 
 (transacao-em-outra-moeda :yuan (last transacoes)) ; {:valor 62.350M, :tipo "despesa", :comentatio "Livro de Clojure", :moeda "¥", :data "03/12/2016"}
+
+;; a unica coisa que muda de uma chamada para outra é a moeda, a aplicação de funções parciais
+;; permite pegar uma função com mais parâmetros e passar menos coisas pra ela
+(def transacao-em-euro (partial transacao-em-outra-moeda :euro)) ;; a moeda ja vai embutida
+
+(def transacao-em-yuan (partial transacao-em-outra-moeda :yuan))
+
+(transacao-em-euro (first transacoes)) ; {:valor 9.240M, :tipo "despesa", :comentatio "Almoço", :moeda "?", :data "19/11/2016"}
+
+(transacao-em-yuan (first transacoes)) ; {:valor 70.950M, :tipo "despesa", :comentatio "Almoço", :moeda "¥", :data "19/11/2016"}
