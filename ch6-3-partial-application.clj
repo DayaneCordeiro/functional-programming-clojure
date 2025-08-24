@@ -47,3 +47,23 @@
 (transacao-em-euro (first transacoes)) ; {:valor 9.240M, :tipo "despesa", :comentatio "Almoço", :moeda "?", :data "19/11/2016"}
 
 (transacao-em-yuan (first transacoes)) ; {:valor 70.950M, :tipo "despesa", :comentatio "Almoço", :moeda "¥", :data "19/11/2016"}
+
+;; tambem seria possivel aplicar as funções em um map
+(map transacao-em-yuan transacoes) ; (
+; {:valor 70.950M, :tipo "despesa", :comentatio "Almoço", :moeda "¥", :data "19/11/2016"} 
+; {:valor 5805.000M, :tipo "receita", :comentatio "Bico", :moeda "¥", :data "01/12/2016"} 
+; {:valor 62.350M, :tipo "despesa", :comentatio "Livro de Clojure", :moeda "¥", :data "03/12/2016"})
+
+(map transacao-em-euro transacoes) ; (
+; {:valor 9.240M, :tipo "despesa", :comentatio "Almoço", :moeda "?", :data "19/11/2016"} 
+; {:valor 756.000M, :tipo "receita", :comentatio "Bico", :moeda "?", :data "01/12/2016"} 
+; {:valor 8.120M, :tipo "despesa", :comentatio "Livro de Clojure", :moeda "?", :data "03/12/2016"})
+
+;; as vezes funções parciais podem ser usadas para facilitar o entendimento do que uma fn faz
+;; Ex: juntar os elementos de um array em uma string
+(clojure.string/join ", " (map texto-resumo-em-yuan transacoes)) ; "19/11/2016 => ¥ -70.950, 01/12/2016 => ¥ +5805.000, 03/12/2016 => ¥ -62.350"
+
+;; melhorando:
+(def juntar-tudo (partial clojure.string/join ", "))
+
+(juntar-tudo (map texto-resumo-em-yuan transacoes)) ; "19/11/2016 => ¥ -70.950, 01/12/2016 => ¥ +5805.000, 03/12/2016 => ¥ -62.350"
