@@ -1,3 +1,10 @@
+;; coisas que uma função pura não faz -> efeitos colaterais:
+;;   Alterar valores dentro de um mapa
+;;   Alterar uma string
+;;   Escrever em um arquivo
+;;   Imprimir na tela
+;;   Inserir dados em um banco
+
 (def de-para [{:de "a" :para "4"}
               {:de "e" :para "3"}
               {:de "i" :para "1"}
@@ -14,3 +21,15 @@
                       (rest dicionario)))))
 
 (escrita-hacker "alameda" de-para) ; "4l4m3d4"
+
+;; anteriormente, foi definida a função transacao-em-outra-moeda que era impura pois usava cotacoes
+;; que era definido fora da função, para corrigir isso, é possivel reescrever assim:
+(def cotacoes
+  {:yuan {:cotacao 2.15M :simbolo "¥"}
+   :euro {:cotacao 0.28M :simbolo "€"}})
+
+(defn transacao-em-outra-moeda [cotacoes moeda transacao]
+  (let [{{cotacao :cotacao simbolo :simbolo}
+         moeda} cotacoes]
+    (assoc transacao :valor (* (:valor transacao))
+           :moeda simbolo)))
