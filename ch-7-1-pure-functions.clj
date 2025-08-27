@@ -33,3 +33,13 @@
          moeda} cotacoes]
     (assoc transacao :valor (* (:valor transacao))
            :moeda simbolo)))
+
+;; O código acima quebraria o restante do código que chama essa fn pois precisa de mais args
+;; usando fn parciais para resolver:
+(defn transacao-convertida [cotacoes moeda transacao]
+  (let [{{cotacao :cotacao simbolo :simbolo}
+         moeda} cotacoes]
+    (assoc transacao :valor (* (:valor transacao))
+           :moeda simbolo)))
+
+(def transacao-em-outra-moeda (partial transacao-convertida cotacoes))
