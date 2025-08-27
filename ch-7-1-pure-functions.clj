@@ -43,3 +43,13 @@
            :moeda simbolo)))
 
 (def transacao-em-outra-moeda (partial transacao-convertida cotacoes))
+
+;; outra forma de resolver é com o recurso de multi-aridade
+;; a função se comporta de formas diferentes de acordo com a quantidade de argumentos que recebe
+(defn transacao-em-outra-moeda 
+  ([cotacoes moeda transacao]
+   (let [{{cotacao :cotacao simbolo :simbolo} moeda} cotacoes]
+     (assoc transacao :valor (* cotacao (:valor transacao))
+            :moeda simbolo)))
+  ([moeda transacao]
+   (transacao-em-outra-moeda cotacoes moeda transacao)))
