@@ -14,3 +14,10 @@ membros-fundadores ; ("Argentina" "Brasil" "Paraguai" "Uruguai")
   (cons "Venezuela" membros-fundadores))
 
 membros-plenos ; ("Venezuela" "Argentina" "Brasil" "Paraguai" "Uruguai")
+
+;; removendo o primeiro elemento de membros plenos para comparar com a lista anterior
+;; rest ignora o primeiro elemento da lista
+(rest membros-plenos) ; ("Argentina" "Brasil" "Paraguai" "Uruguai")
+
+;; identical? compara dois elementos para saber se é o mesmo objeto
+(identical? (rest membros-plenos) membros-fundadores) ; true
