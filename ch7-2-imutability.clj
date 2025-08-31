@@ -21,3 +21,29 @@ membros-plenos ; ("Venezuela" "Argentina" "Brasil" "Paraguai" "Uruguai")
 
 ;; identical? compara dois elementos para saber se é o mesmo objeto
 (identical? (rest membros-plenos) membros-fundadores) ; true
+
+;; a lista de transações atual:
+;; transacoes é uma referência a uma lista de mapas
+;; se for necessário adicionar um elemento é necessário criar uma nova referência, com os valores
+;; novos e os anteriores.
+(def transacoes
+  [{:valor 33M :tipo "despesa" :comentatio "Almoço" :moeda "R$" :data "19/11/2016"}
+   {:valor 2700M :tipo "receita" :comentatio "Bico" :moeda "R$" :data "01/12/2016"}
+   {:valor 29M :tipo "despesa" :comentatio "Livro de Clojure" :moeda "R$" :data "03/12/2016"}])
+
+;; nova referência:
+(def transacoes
+  [{:valor 33M :tipo "despesa" :comentatio "Almoço" :moeda "R$" :data "19/11/2016"}
+   {:valor 2700M :tipo "receita" :comentatio "Bico" :moeda "R$" :data "01/12/2016"}
+   {:valor 29M :tipo "despesa" :comentatio "Livro de Clojure" :moeda "R$" :data "03/12/2016"}
+   {:valor 45M :tipo "despesa" :comentatio "Jogo na steam" :moeda "R$" :data "26/12/2016"}])
+
+;; ou:
+(def transacoes
+  [{:valor 33M :tipo "despesa" :comentatio "Almoço" :moeda "R$" :data "19/11/2016"}
+   {:valor 2700M :tipo "receita" :comentatio "Bico" :moeda "R$" :data "01/12/2016"}
+   {:valor 29M :tipo "despesa" :comentatio "Livro de Clojure" :moeda "R$" :data "03/12/2016"}])
+
+;; o valor dentro de transacoes não muda, mas a referência transacoes muda para outra coleção
+(def transacoes (cons {:valor 29M :tipo "despesa" :comentatio "Livro de Clojure" 
+                       :moeda "R$" :data "03/12/2016"}))
