@@ -47,3 +47,28 @@ membros-plenos ; ("Venezuela" "Argentina" "Brasil" "Paraguai" "Uruguai")
 ;; o valor dentro de transacoes não muda, mas a referência transacoes muda para outra coleção
 (def transacoes (cons {:valor 29M :tipo "despesa" :comentatio "Livro de Clojure" 
                        :moeda "R$" :data "03/12/2016"}))
+
+;; as vezes pode ser necessário manter a referência e mudar o valor do conteúdo como por exemplo um
+;; contador ou caching. Clojure possiu o atom que é uma das formas que a linguagem provê
+;; o gerenciamento de estado.
+
+;; registros referencia um átomo que contem uma lista vazia
+(def registros (atom ())) ; #'user/registros
+
+registros ; #object[clojure.lang.Atom 0xdc411ca {:status :ready, :val ()}]
+
+;; para obter o valor atual do estado do átomo usamos o @
+@registros ; ()
+
+;; para incluir novos elementos usamos a fn swap! a "!" no nome simboliza que uma mudança de 
+;; estado vai acontecer. swap! precisa de dois parâmetros: o átomo alvo e uma função
+;; junto de seus parâmetros que será aplicada aos valores que o átomo contém.
+
+;; inserindo novos elementos no átomo:
+(swap! registros conj {:valor 29M :tipo "despesa" :comentatio "Livro de Clojure"
+                       :moeda "R$" :data "03/12/2016"})
+; ({:valor 29M, :tipo "despesa", :comentatio "Livro de Clojure", :moeda "R$", :data "03/12/2016"})
+
+(swap! registros conj {:valor 2700M :tipo "receita" :comentatio "Bico" :moeda "R$" :data "01/12/2016"})
+; ({:valor 2700M, :tipo "receita", :comentatio "Bico", :moeda "R$", :data "01/12/2016"}
+;  {:valor 29M, :tipo "despesa", :comentatio "Livro de Clojure", :moeda "R$", :data "03/12/2016"})
