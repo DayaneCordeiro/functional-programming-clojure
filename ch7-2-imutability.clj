@@ -72,3 +72,21 @@ registros ; #object[clojure.lang.Atom 0xdc411ca {:status :ready, :val ()}]
 (swap! registros conj {:valor 2700M :tipo "receita" :comentatio "Bico" :moeda "R$" :data "01/12/2016"})
 ; ({:valor 2700M, :tipo "receita", :comentatio "Bico", :moeda "R$", :data "01/12/2016"}
 ;  {:valor 29M, :tipo "despesa", :comentatio "Livro de Clojure", :moeda "R$", :data "03/12/2016"})
+
+;; Para evitar duplicação
+;; abstraindo a inclusão de dados no átomo
+(defn registrar [transacao]
+  (swap! registros conj transacao))
+
+;; usando a abstração
+(registrar {:valor 33M :tipo "despesa" :comentatio "Almoço" :moeda "R$" :data "19/11/2016"})
+; ({:valor 2700M, :tipo "receita", :comentatio "Bico", :moeda "R$", :data "01/12/2016"} 
+;  {:valor 29M, :tipo "despesa", :comentatio "Livro de Clojure", :moeda "R$", :data "03/12/2016"} 
+;  {:valor 33M, :tipo "despesa", :comentatio "Almoço", :moeda "R$", :data "19/11/2016"})
+
+;; usando a abstração novamente
+(registrar {:valor 45M :tipo "despesa" :comentatio "Jogo na steam" :moeda "R$" :data "26/12/2016"})
+; ({:valor 45M, :tipo "despesa", :comentatio "Jogo na steam", :moeda "R$", :data "26/12/2016"} 
+;  {:valor 2700M, :tipo "receita", :comentatio "Bico", :moeda "R$", :data "01/12/2016"} 
+;  {:valor 29M, :tipo "despesa", :comentatio "Livro de Clojure", :moeda "R$", :data "03/12/2016"} 
+;  {:valor 33M, :tipo "despesa", :comentatio "Almoço", :moeda "R$", :data "19/11/2016"})
