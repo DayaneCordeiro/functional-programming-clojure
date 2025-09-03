@@ -90,3 +90,12 @@ registros ; #object[clojure.lang.Atom 0xdc411ca {:status :ready, :val ()}]
 ;  {:valor 2700M, :tipo "receita", :comentatio "Bico", :moeda "R$", :data "01/12/2016"} 
 ;  {:valor 29M, :tipo "despesa", :comentatio "Livro de Clojure", :moeda "R$", :data "03/12/2016"} 
 ;  {:valor 33M, :tipo "despesa", :comentatio "Almoço", :moeda "R$", :data "19/11/2016"})
+
+;; abstraindo a leitura de dados de um átomo
+(def transacoes @registros)
+
+transacoes
+; ({:valor 45M, :tipo "despesa", :comentatio "Jogo na steam", :moeda "R$", :data "26/12/2016"} 
+;  {:valor 2700M, :tipo "receita", :comentatio "Bico", :moeda "R$", :data "01/12/2016"} 
+;  {:valor 29M, :tipo "despesa", :comentatio "Livro de Clojure", :moeda "R$", :data "03/12/2016"} 
+;  {:valor 33M, :tipo "despesa", :comentatio "Almoço", :moeda "R$", :data "19/11/2016"})
