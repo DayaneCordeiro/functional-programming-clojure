@@ -30,3 +30,6 @@
 
 ;; retorna a lista sem o primeiro elemento
 (rest um-ate-5) ;; (2 3 4 5)
+
+;; pegar uma posição especifica da lista
+(nth um-ate-5 2)
