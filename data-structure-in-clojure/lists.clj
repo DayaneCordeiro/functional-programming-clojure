@@ -33,3 +33,5 @@
 
 ;; pegar uma posição especifica da lista
 (nth um-ate-5 2)
+
+;; ------------------------------------------------------
