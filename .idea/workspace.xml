@@ -7,7 +7,7 @@
     <list default="true" id="843a3c29-fdee-42d6-ad0d-97378db7c89a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data-structure-in-clojure/lists.clj" beforeDir="false" afterPath="$PROJECT_DIR$/data-structure-in-clojure/lists.clj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data-structure-in-clojure/vectors.clj" beforeDir="false" afterPath="$PROJECT_DIR$/data-structure-in-clojure/vectors.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-structure-in-clojure/maps.clj" beforeDir="false" afterPath="$PROJECT_DIR$/data-structure-in-clojure/maps.clj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

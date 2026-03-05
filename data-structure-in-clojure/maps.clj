@@ -47,3 +47,27 @@
 
 (:rotulos transacao-desnecessaria '())
 ;; ("desnecessária" "cartão")
+
+;; -----------------------------------------------------
+;; Crie um map representando um pedido:
+{:id 123
+ :customer "Ana"
+ :total 250
+ :paid false}
+
+(def pedido {:id 123
+             :customer "Ana"
+             :total 250
+             :paid false})
+
+;; Marque como pago
+(def pedido
+  (assoc pedido :paid true))  ; {:id 123, :customer "Ana", :total 250, :paid true}
+
+;; Aumente o total em 10%
+(def pedido (let [total (get pedido :total)]
+     (assoc pedido :total (+ total (* total 0.1)))))
+; {:id 123, :customer "Ana", :total 275.0, :paid false}
+
+; Retorne apenas o valor total
+(get pedido :total) ; 275.0

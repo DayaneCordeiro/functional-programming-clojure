@@ -35,3 +35,12 @@
 (nth um-ate-5 2)
 
 ;; ------------------------------------------------------
+;; Crie uma lista com 5 números.
+'(1 2 3 4 5)
+(def my-list (list 1 2 3 4 5))
+
+(conj my-list 6) ; (6 1 2 3 4 5)
+
+;; Por que listas são boas para stack-like operations?
+;; justamente por colocar os elementos inseridos na primeira posição e stack-like
+;; operations são LIFO
